@@ -1,0 +1,56 @@
+#popout-loading-div,
+#loading-div {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: rgb(173, 216, 230, 0.8);
+  z-index: 2002;
+  text-align: center;
+  /* display: none; */
+}
+
+#success-div h1,
+#loading-div h1,
+#warning-dialog h2 {
+  margin-top: 120px;
+}
+
+#popout-loading-div {
+  display: block;
+}
+
+
+#warning-dialog {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: rgb(255, 255, 0);
+  z-index: 2003;
+  text-align: center;
+  /* display: none; */
+}
+
+#warning-dialog button {
+  padding: 10px 50px;
+  color: white;
+  background: rgba(0, 0, 255, 0.8);
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto 80px auto;
+  letter-spacing: 1px;
+}
+
+#success-div {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 128, 0, 1);
+  z-index: 2003;
+  text-align: center;
+}
