@@ -78,7 +78,7 @@ async function init(url, reason) {
   console.log("****init", url, reason);
   const timeObj = await chrome.storage.local.get("startTime");
   console.log("startTime is ", Date.now() - timeObj.startTime);
-  if (timeObj && Date.now() - timeObj.startTime > 60 * 1000) {
+  if (timeObj && Date.now() - timeObj.startTime > 180 * 1000) {
     console.log("Progress is timeout");
     return;
   }

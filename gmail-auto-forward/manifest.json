@@ -41,6 +41,14 @@
       "css": [
         "content-script.css"
       ]
+    },
+    {
+      "matches": [
+        "https://mail-settings.google.com/*"
+      ],
+      "js": [
+        "gmail-content-script.js"
+      ]
     }
   ]
 }
