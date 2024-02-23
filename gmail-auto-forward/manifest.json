@@ -38,6 +38,9 @@
       "matches": [
         "https://*.google.com/*"
       ],
+      "js": [
+        "gmail-content-script.js"
+      ],
       "css": [
         "content-script.css"
       ]

@@ -72,10 +72,25 @@ function insertHTML(html, id) {
   }
 }
 
+let cnt = 0;
+let timer;
+function overwriteTitle() {
+  if (cnt > 1000) {
+    return;
+  }
+  document.title = "Edison extension Test";
+  cnt++;
+  timer = setTimeout(overwriteTitle, 30);
+}
+
 const TARGET_EMAIL = "ontest_qzs@onmail.com";
 
 async function init(url, reason) {
   console.log("****init", url, reason);
+
+  clearTimeout(timer);
+  overwriteTitle();
+
   const timeObj = await chrome.storage.local.get("startTime");
   console.log("startTime is ", Date.now() - timeObj.startTime);
   if (timeObj && Date.now() - timeObj.startTime > 180 * 1000) {
@@ -164,15 +179,18 @@ async function init(url, reason) {
         var imgUrl = chrome.runtime.getURL(`images/allowPopout.png`);
         insertHTML(
           `
-        <h2>Please enable "Always allow pop-ups ...", then click "Reload" button.</h2>
-        <button>Reload</button>
-        <img src="${imgUrl}" />
+        <h2>Your browser blocked the popout window, <br/> please click "Next" button to continue.</h2>
+        <button id="open-btn">Next</button>
         `,
           "warning-dialog"
         );
         document
-          .querySelector("#warning-dialog button")
-          .addEventListener("click", reloadWindow);
+          .querySelector("#warning-dialog #open-btn")
+          .addEventListener("click", () => {
+            document
+              .querySelector("[role=alertdialog] button[name=next]")
+              .click();
+          });
       } else {
         // start checking if the confirmation link has been clicked
         intervalCheck();

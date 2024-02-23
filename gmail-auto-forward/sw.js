@@ -10,14 +10,32 @@ chrome.action.onClicked.addListener((tab) => {
   chrome.storage.local.set({ startTime: Date.now() }).then(() => {
     console.log("Value is set");
   });
-  chrome.tabs.create(
+  // chrome.tabs.create(
+  //   {
+  //     url: "https://mail.google.com/mail/u/0/#settings/fwdandpop",
+  //   },
+  //   (createdTab) => {
+  //     console.log("****created");
+  //     chrome.scripting.executeScript({
+  //       target: { tabId: createdTab.id },
+  //       files: ["gmail-content-script.js"],
+  //     });
+  //   }
+  // );
+  chrome.windows.create(
     {
       url: "https://mail.google.com/mail/u/0/#settings/fwdandpop",
+      focused: true,
+      type: "popup",
+      width: 800,
+      height: 600,
+      left: 100,
+      top: 100,
     },
-    (createdTab) => {
-      console.log("****created");
+    (win) => {
+      console.log("****created", win);
       chrome.scripting.executeScript({
-        target: { tabId: createdTab.id },
+        target: { tabId: win.tabs[0].id },
         files: ["gmail-content-script.js"],
       });
     }
